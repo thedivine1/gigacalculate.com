@@ -1,70 +1,124 @@
-# Getting Started with Create React App
+# Gigacalculate
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Gigacalculate is being built as a high-scale calculator platform to compete with calculator directories such as Calculator.net, OmniCalculator, and UnitConverter.
 
-## Available Scripts
+This repository currently provides a **production-ready MVP homepage** with:
 
-In the project directory, you can run:
+- Category-first information architecture for future calculator pages.
+- SEO/social metadata setup for `https://www.gigacalculate.com`.
+- Search-engine crawling defaults (`robots.txt` + `sitemap.xml`).
+- A clean launch path for static hosting.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Quick start
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```bash
+npm install
+npm start
+```
 
-### `npm test`
+Open `http://localhost:3000`.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Production build
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+npm run build
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Output is generated in the `build/` directory.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## How to test this repo before going live
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 1) Run it locally (development mode)
+```bash
+npm install
+npm start
+```
+Then open `http://localhost:3000` and test:
+- Layout and responsive behavior (mobile + desktop)
+- Links/buttons on the homepage
+- Browser console (no runtime errors)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 2) Validate tests and production build
+```bash
+npm test -- --watchAll=false
+npm run build
+```
+This verifies unit tests and confirms the app compiles in production mode.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 3) Preview the exact production build locally
+```bash
+npx serve -s build
+```
+Then open the URL printed by `serve` (usually `http://localhost:3000` or `http://localhost:5000`).
 
-## Learn More
+This step is important because it shows exactly what users will see after deployment.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## How to see it online (staging + real domain)
 
-### Code Splitting
+### Fastest way: Vercel preview deployments
+1. Push code to GitHub.
+2. Import repo into Vercel.
+3. Every commit gets a preview URL like `https://<project>-<hash>.vercel.app`.
+4. Open that preview URL on phone + desktop and verify visuals, metadata, and behavior.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Go live on your domain
+1. In Vercel, add `www.gigacalculate.com` as a domain.
+2. Update DNS at your registrar with Vercel-provided records.
+3. After DNS propagates, verify:
+   - `https://www.gigacalculate.com` loads correctly
+   - `https://www.gigacalculate.com/robots.txt` is accessible
+   - `https://www.gigacalculate.com/sitemap.xml` is accessible
+4. Submit sitemap in Google Search Console and Bing Webmaster.
 
-### Analyzing the Bundle Size
+---
+## Deploy to your domain (recommended fast path)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Option A: Vercel (fastest)
+1. Push this repo to GitHub.
+2. Import project in Vercel.
+3. Framework preset: `Create React App`.
+4. Build command: `npm run build`.
+5. Output directory: `build`.
+6. Attach custom domain: `www.gigacalculate.com` and point DNS records from your registrar.
 
-### Making a Progressive Web App
+### Option B: Netlify
+1. Create a new site from your repo.
+2. Build command: `npm run build`.
+3. Publish directory: `build`.
+4. Set your custom domain and verify DNS.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Option C: Any static hosting + CDN
+Deploy `build/` to S3 + CloudFront, Cloudflare Pages, or similar.
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Post-launch checklist
 
-### Deployment
+- Add dedicated routes/pages for each calculator (one calculator per URL).
+- Add JSON-LD schema (`FAQPage`, `WebApplication`, `BreadcrumbList`) per calculator page.
+- Implement internal linking between related calculators.
+- Add analytics + search console (`GSC`, `Bing Webmaster`).
+- Submit sitemap in search consoles.
+- Optimize Core Web Vitals after first real-user traffic.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+## Suggested first calculator batch (high demand)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. BMI Calculator
+2. EMI Calculator
+3. Percentage Calculator
+4. GST Calculator
+5. SIP Calculator
+6. Unit converters (length, weight, temperature)
+
+This batch is enough to validate user intent and establish indexable content before scaling.
